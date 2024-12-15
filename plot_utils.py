@@ -2,11 +2,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def make_tsplots(t, plot_data, t_label="Time (hours)", subplot_height=2.0, figsize=None):
+def make_tsplots(
+    t, 
+    plot_data, 
+    t_label="Time (hours)", 
+    sharex=True, 
+    sharey=False, 
+    subplot_height=2.0, 
+    figsize=None
+):
     n = len(plot_data)
     if figsize is None:
         figsize = (7, 0.5 + subplot_height * n)
-    fig, axes = plt.subplots(n, 1, sharex=True, figsize=figsize)
+    fig, axes = plt.subplots(n, 1, sharex=sharex, sharey=sharey, figsize=figsize)
     axes = [axes] if isinstance(axes, plt.Axes) else axes
     for ax, (title, data) in zip(axes, plot_data.items()):
         kind = data.get("kind", "plot")
