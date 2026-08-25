@@ -3,18 +3,20 @@ import numpy as np
 
 
 def make_tsplots(
-    t, 
-    plot_data, 
-    t_label="Time (hours)", 
-    sharex=True, 
-    sharey=False, 
-    subplot_height=2.0, 
-    figsize=None
+    t,
+    plot_data,
+    t_label="Time (hours)",
+    sharex=True,
+    sharey=False,
+    subplot_height=2.0,
+    figsize=None,
 ):
     n = len(plot_data)
     if figsize is None:
         figsize = (7, 0.5 + subplot_height * n)
-    fig, axes = plt.subplots(n, 1, sharex=sharex, sharey=sharey, figsize=figsize)
+    fig, axes = plt.subplots(
+        n, 1, sharex=sharex, sharey=sharey, figsize=figsize
+    )
     axes = [axes] if isinstance(axes, plt.Axes) else axes
     for ax, (title, data) in zip(axes, plot_data.items()):
         kind = data.get("kind", "plot")
@@ -39,8 +41,8 @@ def make_ioplots(
     inputs=None,
     states=None,
     outputs=None,
-    inputs_labels=None, 
-    states_labels=None, 
+    inputs_labels=None,
+    states_labels=None,
     outputs_labels=None,
     t_label="Time (hours)",
     figsize=None,
@@ -52,9 +54,9 @@ def make_ioplots(
         plot_data["States"] = {"y": states, "labels": states_labels}
     if inputs is not None:
         plot_data["Inputs"] = {
-            "y": inputs, 
-            "labels": inputs_labels, 
+            "y": inputs,
+            "labels": inputs_labels,
             "kind": "step",
-            "kwargs": {"where": "post"}
+            "kwargs": {"where": "post"},
         }
     return make_tsplots(t, plot_data, figsize=figsize, t_label=t_label)
